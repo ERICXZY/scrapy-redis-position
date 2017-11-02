@@ -1,0 +1,81 @@
+{% load static from staticfiles %}
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html lang="en" class="ie6 ielt7 ielt8 ielt9"><![endif]--><!--[if IE 7 ]><html lang="en" class="ie7 ielt8 ielt9"><![endif]--><!--[if IE 8 ]><html lang="en" class="ie8 ielt9"><![endif]--><!--[if IE 9 ]><html lang="en" class="ie9"> <![endif]--><!--[if (gt IE 9)|!(IE)]><!--> 
+<html lang="en"><!--<![endif]--> 
+	<head>
+		<meta charset="utf-8">
+		<title>小 北 楼</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="{% static 'myadmin/css/bootstrap.min.css' %}" rel="stylesheet">
+		<link href="{% static 'myadmin/css/bootstrap-responsive.min.css' %}" rel="stylesheet">
+		<link href="{% static 'myadmin/css/site.css' %}" rel="stylesheet">
+		<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+		{%block mainhead%}
+		{%endblock%}
+	</head>
+	<body>
+		<div class="container">
+			<div class="navbar">
+				<div class="navbar-inner">
+					<div class="container">
+						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a> <a class="brand" href="#">后台管理页面</a>
+						<div class="nav-collapse">
+							<ul class="nav">
+								<li class="active">
+									<a href="index.html">职位</a>
+								</li>
+								<li>
+									<a href="settings.htm">在线设置</a>
+								</li>
+								<li>
+									<a href="help.htm">帮助</a>
+								</li>
+								<li class="dropdown">
+									<a href="help.htm" class="dropdown-toggle" data-toggle="dropdown">更多 <b class="caret"></b></a>
+									<ul class="dropdown-menu">
+										<li>
+											<a href="help.htm">Introduction Tour</a>
+										</li>
+										<li>
+											<a href="help.htm">Access Permissions</a>
+										</li>
+										<li class="divider">
+										</li>
+										<li class="nav-header">
+											Files
+										</li>
+									</ul>
+								</li>
+							</ul>
+                            {%block form%}
+
+		                    {%endblock%}
+
+							<ul class="nav pull-right">
+								<li>
+									<a href="profile.htm"></a>
+								</li>
+								<li>
+									<a href="">退出</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				
+				<div class="span12">
+					{%block mainbody%}
+					{%endblock%}
+				</div>
+			</div>
+		</div>
+		<script src="{% static 'myadmin/js/jquery.min.js' %}"></script>
+		<script src="{% static 'myadmin/js/bootstrap.min.js' %}"></script>
+		<script src="{% static 'myadmin/js/site.js' %}"></script>
+		{%block mainfoot%}
+
+		{%endblock%}
+	</body>
+</html>

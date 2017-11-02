@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+{#头#}
+{%block mainhead%}
+<script>
+	function doDel(uu){
+		if(confirm('确定要删除吗?')){
+			window.location=uu;
+		}
+	}
+</script>
+{%endblock%}
+
+{#体#}
+{%block mainbody%}
+    <center>
+	<!-- 薪资 -->
+	<div>
+		<li style="float:left;margin-left:10px;margin-right:20px;font-size:20px">
+		<a href="/list?page=&salary=&edu_bg={{request.GET.edu_bg}}&pub_date={{request.GET.pub_date}}&experience={{request.GET.experience}}&keyword={{ keywords }}" style='text-decoration:none;color:black'>所有</a>
+		</li>
+
+		{% for salary_con in salary_con_list %}
+		<li style="float:left;margin-left:10px;margin-right:20px;font-size:16px">
+		<a href="/list?page=&salary={{salary_con.con_str}}&edu_bg={{request.GET.edu_bg}}&pub_date={{request.GET.pub_date}}&experience={{request.GET.experience}}&keyword={{ keywords }}" style='text-decoration:none;color:black'>{{salary_con.con_str}}</a>
+		</li>
+		{% endfor %}
+
+		<div style="clear:both"></div>
+	</div>
+	<br>
+
+	<!-- 教育背景 -->
+	<div>
+		<li style="float:left;margin-left:10px;margin-right:20px;font-size:20px">
+		<a href="/list?page=&salary={{request.GET.salary}}&edu_bg=&pub_date={{request.GET.pub_date}}&experience={{request.GET.experience}}&keyword={{ keywords }}" style='text-decoration:none;color:black'>所有</a>
+		</li>
+
+		{% for edu_bg in edu_bg_list %}
+		<li style="float:left;margin-left:10px;margin-right:20px;font-size:16px">
+		<a href="/list?page=&salary={{request.GET.salary}}&edu_bg={{edu_bg.con_str}}&pub_date={{request.GET.pub_date}}&experience={{request.GET.experience}}&keyword={{ keywords }}" style='text-decoration:none;color:black'>{{edu_bg.con_str}}</a>
+		</li>
+		{% endfor %}
+
+		<div style="clear:both"></div>
+	</div>
+	<br>
+
+	<!-- 发布日期 -->
+	<div>
+		<li style="float:left;margin-left:10px;margin-right:20px;font-size:20px">
+		<a href="/list?page=&salary={{request.GET.salary}}&edu_bg={{request.GET.edu_bg}}&pub_date=&experience={{request.GET.experience}}&keyword={{ keywords }}" style='text-decoration:none;color:black'>所有</a>
+		</li>
+
+		{% for pub_date in pub_date_list %}
+		<li style="float:left;margin-left:10px;margin-right:20px;font-size:16px">
+		<a href="/list?page=&salary={{request.GET.salary}}&edu_bg={{request.GET.edu_bg}}&pub_date={{pub_date.con_str}}&experience={{request.GET.experience}}&keyword={{ keywords }}" style='text-decoration:none;color:black'>{{pub_date.con_str}}</a>
+		</li>
+		{% endfor %}
+		<div style="clear:both"></div>
+	</div>
+	<br>
+	<!-- 工作经验 -->
+
+	<div>
+		<li style="float:left;margin-left:10px;margin-right:20px;font-size:20px"><a href="/list?page=&salary={{request.GET.salary}}&edu_bg={{request.GET.edu_bg}}&pub_date={{request.GET.pub_date}}&experience=&keyword={{ keywords }}" style='text-decoration:none;color:black'>所有</a></li>
+		{% for experience in experience_list %}
+		<li style="float:left;margin-left:10px;margin-right:20px;font-size:16px"><a href="/list?page=&salary={{request.GET.salary}}&edu_bg={{request.GET.edu_bg}}&pub_date={{request.GET.pub_date}}&experience={{experience.con_str}}&keyword={{ keywords }}" style='text-decoration:none;color:black'>{{experience.con_str}}</a></li>
+		{% endfor %}
+		<div style="clear:both"></div>
+	</div>
+
+
+	<br><br>
+	<table class="table table-bordered table-striped">
+		<!-- 表头 -->
+		<thead>
+			<tr>
+				<th style="width:200px">
+					职位名称
+				</th>
+				<th style="width:70px">
+					职位来源
+				</th>
+				<th style="width:70px">
+					工资
+				</th>
+				<th style="">
+					教育背景
+				</th>
+                <th style="">
+					工资经验
+				</th>
+				<th style="width:80px">
+					发布日期
+				</th>
+				<th style="width:300px">
+					公司名称
+				</th>
+				<th style="text-align:center">
+					工作地点
+				</th>
+				<th style="text-align:center">
+					详情链接
+				</th>
+			</tr>
+		</thead>
+		<!-- 职位列表 -->
+		<tbody>
+			{% for job in jobslist %}
+				<tr>
+					<td>{{job.pos_name}}</td>
+					<td>{{job.spider}}</td>
+					<td>{{job.salary}}</td>
+					<td>{{job.edu_bg}}</td>
+                    <td>{{job.experience}}</td>
+					<td>{{job.pub_date}}</td>
+					<td>{{job.company}}</td>
+					<td style="text-align:center">{{job.location}}</td>
+					<td style="text-align:center">
+						<a class="btn btn-default" href="{{job.detail_url}}">详情</a>			
+					</td>				
+				</tr>
+			{% endfor %}
+		</tbody>
+
+	</table>
+	<div class="pagination">
+		<ul>
+			{% if page != 1 %}
+			<li><a  href="/list?page=1&salary={{request.GET.salary}}&edu_bg={{request.GET.edu_bg}}&pub_date={{request.GET.pub_date}}&experience={{request.GET.experience}}&keyword={{ keywords }}" >回到首页</a></li>
+			<li><a  href="/list?page={{page|add:-1}}&salary={{request.GET.salary}}&edu_bg={{request.GET.edu_bg}}&pub_date={{request.GET.pub_date}}&experience={{request.GET.experience}}&keyword={{ keywords }}" >上一页</a></li>
+			{% endif %}
+			<li><a  href="/list?page={{page}}&salary={{request.GET.salary}}&edu_bg={{request.GET.edu_bg}}&pub_date={{request.GET.pub_date}}&experience={{request.GET.experience}}&keyword={{ keywords }}" >{{page}}</a></li>
+			{% if page != lastpage %}
+                {% if  page|add:+1  <= lastpage %}
+                    <li><a  href="/list?page={{page|add:+1}}&salary={{request.GET.salary}}&edu_bg={{request.GET.edu_bg}}&pub_date={{request.GET.pub_date}}&experience={{request.GET.experience}}&keyword={{ keywords }}" >{{page|add:+1}}</a></li>
+                {% endif %}
+                {% if page|add:+2 <= lastpage %}
+                    <li><a  href="/list?page={{page|add:+2}}&salary={{request.GET.salary}}&edu_bg={{request.GET.edu_bg}}&pub_date={{request.GET.pub_date}}&experience={{request.GET.experience}}&keyword={{ keywords }}" >{{page|add:+2}}</a></li>
+                {% endif %}
+                <li><a  href="" >...</a></li>
+                {% if page|add:+9 <= lastpage %}
+                    <li><a  href="/list?page={{page|add:+9}}&salary={{request.GET.salary}}&edu_bg={{request.GET.edu_bg}}&pub_date={{request.GET.pub_date}}&experience={{request.GET.experience}}&keyword={{ keywords }}" >{{page|add:+9}}</a></li>
+                {% endif %}
+                {% if page|add:+10 <= lastpage %}
+                    <li><a  href="/list?page={{page|add:+10}}&salary={{request.GET.salary}}&edu_bg={{request.GET.edu_bg}}&pub_date={{request.GET.pub_date}}&experience={{request.GET.experience}}&keyword={{ keywords }}" >{{page|add:+10}}</a></li>
+                {% endif %}
+                {% if page|add:+11 <= lastpage %}
+                    <li><a  href="/list?page={{page|add:+11}}&salary={{request.GET.salary}}&edu_bg={{request.GET.edu_bg}}&pub_date={{request.GET.pub_date}}&experience={{request.GET.experience}}&keyword={{ keywords }}" >{{page|add:+11}}</a></li>
+                {% endif %}
+                <li><a  href="/list?page={{page|add:1}}&salary={{request.GET.salary}}&edu_bg={{request.GET.edu_bg}}&pub_date={{request.GET.pub_date}}&experience={{request.GET.experience}}&keyword={{ keywords }}" >下一页</a></li>
+                <li><a  href="/list?page={{lastpage}}&salary={{request.GET.salary}}&edu_bg={{request.GET.edu_bg}}&pub_date={{request.GET.pub_date}}&experience={{request.GET.experience}}&keyword={{ keywords }}" >最后一页</a></li>
+			{% else %}
+			<li><a href="">已是最后一页</a></li>
+			{% endif %}
+
+		</ul>
+	</div>
+    </center>
+{%endblock%}
+
+{#form#}
+{% block form %}
+    <form class="navbar-search pull-left" action="{% url 'index' 1 %}" method="post">
+        {% csrf_token %}
+        <input type="text" class="search-query span2" placeholder="Search" name="keywords"/>&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="submit" value="搜索" style="height: 30px;width: 50px">
+    </form>
+{% endblock %}

@@ -1,0 +1,13 @@
+job_id         int,primary key,auto_increment,unsigned             职位id 
+spider	       varchar,not null                                    爬虫名称 
+detail_url     varchar,unique,not null,                            职位详情链接 
+pos_name       varchar,                                            职位名称 
+salary         varchar                                             工资 
+pub_date       varchar,                                            发布日期
+edu_bg         varchar,                                            教育背景
+experience     varchar,                                            工作经验
+location       varchar,                                            工作地点 
+company        varchar，                                           公司名称 
+pos_desc       text,                                               职位描述 
+crawled        datetime,                                           爬取时间
+
